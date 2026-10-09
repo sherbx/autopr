@@ -1,6 +1,6 @@
 from langgraph.graph import END, StateGraph
 
-from src.state import AgentState
+from autopr.state import AgentState
 
 
 # Node stubs (to be populated in subsequent milestones)
@@ -62,13 +62,11 @@ workflow.add_node("escalate_node", escalate_node)
 
 workflow.set_entry_point("triage_node")
 
-
 workflow.add_conditional_edges("triage_node", route_triage)
 workflow.add_edge("retrieve_context_node", "plan_and_code_node")
 workflow.add_edge("plan_and_code_node", "sandbox_verification_node")
-workflow.add_conditional_edges("sanbox_verification_node", route_verification)
+workflow.add_conditional_edges("sandbox_verification_node", route_verification)
 workflow.add_edge("generate_pr_node", END)
 workflow.add_edge("escalate_node", END)
-
 
 app = workflow.compile()
