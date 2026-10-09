@@ -10,6 +10,11 @@ requires-python = ">=3.12"
 dependencies = [
     "langgraph>=1.2.14",
     "pydantic>=2.14.0",
+    "qdrant-client>=1.19.1",
+    "rank-bm25>=0.2.2",
+    "sentence-transformers>=6.1.0",
+    "tree-sitter>=0.26.0",
+    "tree-sitter-python>=0.25.0",
 ]
 
 [project.scripts]
@@ -18,3 +23,8 @@ autopr = "autopr:main"
 [build-system]
 requires = ["uv_build>=0.12.23,<0.13.0"]
 build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]
