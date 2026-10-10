@@ -1,34 +1,11 @@
 from langgraph.graph import END, StateGraph
 
+from autopr.nodes.coder import plan_and_code_node
+from autopr.nodes.context import retrieve_context_node
+from autopr.nodes.pr import escalate_node, generate_pr_node
+from autopr.nodes.triage import triage_node
+from autopr.nodes.verifier import sandbox_verification_node
 from autopr.state import AgentState
-
-
-# Node stubs (to be populated in subsequent milestones)
-def triage_node(_state: AgentState) -> dict:
-    return {"is_actionable": True, "triage_notes": "Issue spec is complete."}
-
-
-def retrieve_context_node(_state: AgentState) -> dict:
-    return {"retrieved_docs": ["Relevant source file and interface specs."]}
-
-
-def plan_and_code_node(_state: AgentState) -> dict:
-    return {"plan": "1. Update schema. 2. Fix bug in handler.", "patches": []}
-
-
-def sandbox_verification_node(state: AgentState) -> dict:
-    return {
-        "retry_count": state.get("retry_count", 0) + 1,
-        "verification_result": None,
-    }
-
-
-def generate_pr_node(_state: AgentState) -> dict:
-    return {"pr_ready": True}
-
-
-def escalate_node(_state: AgentState) -> dict:
-    return {"pr_ready": False}
 
 
 # Conditional Routers

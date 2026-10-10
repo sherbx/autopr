@@ -1,8 +1,8 @@
-from autopr.graph import AgentState
 from autopr.nodes.context import retrieve_context_node
+from autopr.state import AgentState
 
 
-def test_retrieve_context_node_populates_state(monkeypatch):
+def test_retrieve_context_node_populates_state(monkeypatch) -> None:
     mock_results = [
         {
             "content": "def login(): pass",

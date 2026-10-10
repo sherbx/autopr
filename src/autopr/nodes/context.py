@@ -1,5 +1,5 @@
-from autopr.graph import AgentState
 from autopr.retrieval.hybrid_search import HybridCodeRetriever
+from autopr.state import AgentState
 
 # Module-level or injected retriever instance
 retriever = HybridCodeRetriever()

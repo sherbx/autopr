@@ -28,7 +28,7 @@ def mock_repo(tmp_path: Path):
     return repo
 
 
-def test_sandbox_executes_passing_code(mock_repo):
+def test_sandbox_executes_passing_code(mock_repo) -> None:
     engine = SandboxExecutionEngine(base_repo_path=str(mock_repo))
     result = engine.execute_in_isolated_env(patches=[])
 
@@ -37,12 +37,13 @@ def test_sandbox_executes_passing_code(mock_repo):
     assert len(result.failing_test_names) == 0
 
 
-def test_sandbox_catches_buggy_patch(mock_repo):
+def test_sandbox_catches_buggy_patch(mock_repo) -> None:
     engine = SandboxExecutionEngine(base_repo_path=str(mock_repo))
 
     # Introduce a buggy patch that breaks the calculation
     broken_patch = FilePatch(
-        file_path="calculator.py", diff="def add(a, b):\n    return a - b\n"
+        file_path="calculator.py",
+        diff="def add(a, b):\n    return a - b\n",
     )
 
     result = engine.execute_in_isolated_env(patches=[broken_patch])
@@ -52,7 +53,7 @@ def test_sandbox_catches_buggy_patch(mock_repo):
     assert any("test_add" in name for name in result.failing_test_names)
 
 
-def test_sandbox_enforces_timeout(mock_repo):
+def test_sandbox_enforces_timeout(mock_repo) -> None:
     engine = SandboxExecutionEngine(base_repo_path=str(mock_repo), timeout_seconds=1)
 
     # Introduce an infinite loop patch
